@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <title>review</title>
+        <style>
+        .star-outer {
+            position: relative;
+            display: inline-block;
+            }
+        
+            .star-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            }
+        
+            .star-outer::before {
+            content: "\f005 \f005 \f005 \f005 \f005" ;
+            font-family: "Font Awesome\ 5 Free" ;
+            font-weight: 900;
+            color: #ccc;
+            }
+        
+            .star-inner::before {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: "Font Awesome\ 5 Free";
+            font-weight: 900;
+            color: #f8ce0b;
+            }
+            </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="form-group">
+                <input type="number" id="rating-control" class="form-control" step="0.1" max="5" placeholder="Rate 1-5" >
+            </div>
+            <table class="table table-head">
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="rate">
+                        <td>Your Rating</td>
+                        <td>
+                            <div class="star-outer">
+                                <div class="star-inner"></div>
+                            </div>
+                            <span class="number-rating"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            //initial ratings
+            const ratings={
+                rate: 4
+            }
+            const totalstars=5;
+            document.addEventListener('DOMContentLoaded',getRatings);
+            //rating selection
+            const ratingControl = document.getElementById('rating-control');
+            ratingControl.value=ratings.rate;
+            ratingControl.addEventListener('blur', (e) => {
+                const rating = e.target.value;
+                // Make sure 5 or under
+                if (rating > 5) {
+                    alert('Please rate 1 - 5');
+                    return;
+                }
+
+            // Change rating
+            ratings.rate= rating;
+            getRatings();});
+
+            function getRatings(){
+                //for(let rating in ratings){
+                     // Get percentage
+                    const starPercentage = (ratings.rate / totalstars) * 100;
+
+                    // Round to nearest 10
+                    const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+                    console.log(starPercentageRounded);
+                    document.querySelector(`.star-inner`).style.width = starPercentageRounded;
+
+                }
+            
+                
+            
+        </script>
+        
+    </body>
+</html>
