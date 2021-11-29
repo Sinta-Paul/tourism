@@ -95,10 +95,6 @@ h2{
     text-align: center;
     padding: 20px;
 }
-label{
-    font-size: 15px;
-    font-style: oblique;
-}
 input#name{
     width: 300px;
     border:1px solid #ddd;
