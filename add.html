@@ -1,57 +1,106 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            Add
-        </title>
-        <link rel="stylesheet" href="tourism.css">
-    </head>
-    <body class="image">
-        <div class="add" id="add">
-            <h3>Add your favourite places</h3>
-            <p>
-                Is there any place that you visited,found it good and worth sharing?<br>
-                Share your experiences,photos,review and suitable hours here.
-                <form>
-                    <h2>
-                    <label for="name" class="tags">Name:</label><br>
-                    <input type="text" name="name"><br>
-                    <label for="email" class="tags">e-mail:</label><br>
-                    <input type="text" name="email" ><br>
-                    <label for="district" class="tags">District:</label>
-                    <select>
-                        <option value="Alappuzha">Alappuzha</option>
-                        <option value="Ernakulam">Ernakulam</option>
-                        <option value="Idukki">Idukki</option>
-                        <option value="Kannur">Kannur</option>
-                        <option value="Kasargod">Kasargod</option>
-                        <option value="Kollam">Kollam</option>
-                        <option value="Kottayam">Kottayam</option>
-                        <option value="Kozhikode">Kozhikode</option>
-                        <option value="Malappuram">Malappuram</option>
-                        <option value="Palakkad">Palakkad</option>
-                        <option value="Pathanamthitta">Pathanamthitta</option>
-                        <option value="Thiruvananthapuram">Thiruvananthapuram</option>
-                        <option value="Thrissur">Thrissur</option>
-                        <option value="Wayanad">Wayanad</option>
-                    </select><br>
-                    <label for="place" class="tags">Place</label><br>
-                    <input type="text" name="place"><br>
-                    <label for="statement" class="tags">Your experience</label><br>
-                    <input type="text" name="opinion" size="15"><br>
-                    <label for="rating" class="tags">Leave a rating</label><br>
-                    <input type="radio"value="Bad">
-                    <label for="bad">Bad</label>
-                    <input type="radio" value="Fair">
-                    <label for="fair">Fair</label>
-                    <input type="radio" value="Good">
-                    <label for="good">Good</label>
-                    <input type="radio" value="Excellent">
-                    <label for="excellent">Excellent</label><br>
-                    <input type="submit" value="Submit">
-                    </h2>
-                </form>
-            </p>
-        </div>
-    </body>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Add
+    </title>
+    <link rel="stylesheet" href="tourism.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+</head>
+
+<body class="image">
+    <div class="add" id="add">
+        <h3>Add your favourite places</h3>
+        <p>
+            Is there any place that you visited,found it good and worth sharing?<br>
+            Share your experiences,review and suitable hours here.
+        <form>
+            <h3>
+                <label for="name" class="tags">Name:</label>
+                <input type="text" name="name"><br><br>
+                <label for="email" class="tags">e-mail:</label>
+                <input type="text" name="email"><br><br>
+                <label for="district" class="tags">District:</label>
+                <select>
+                    <option value="Alappuzha">Alappuzha</option>
+                    <option value="Ernakulam">Ernakulam</option>
+                    <option value="Idukki">Idukki</option>
+                    <option value="Kannur">Kannur</option>
+                    <option value="Kasargod">Kasargod</option>
+                    <option value="Kollam">Kollam</option>
+                    <option value="Kottayam">Kottayam</option>
+                    <option value="Kozhikode">Kozhikode</option>
+                    <option value="Malappuram">Malappuram</option>
+                    <option value="Palakkad">Palakkad</option>
+                    <option value="Pathanamthitta">Pathanamthitta</option>
+                    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                    <option value="Thrissur">Thrissur</option>
+                    <option value="Wayanad">Wayanad</option>
+                </select><br><br>
+                <label for="place" class="tags">Place :</label>
+                <input type="text" name="place"><br><br>
+                <label for="statement" class="tags">Your experience :</label>
+                <input type="text" name="opinion" size="15"><br><br>
+                <div class="container">
+                    <div class="form-group">
+                        Your Rating : 
+                        <input type="number" id="rating-control" class="form-control" step="0.1" max="5" placeholder="Rate 1-5" >
+                    </div>
+                    <table class="table table-head">
+                        <tbody>
+                            <tr class="rate">
+                                <td>
+                                    <div class="star-outer">
+                                        <div class="star-inner"></div>
+                                    </div>
+                                    <span class="number-rating"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <script>
+                    //initial ratings
+                    const ratings={
+                        rate: 4
+                    }
+                    const totalstars=5;
+                    document.addEventListener('DOMContentLoaded',getRatings);
+                    //rating selection
+                    const ratingControl = document.getElementById('rating-control');
+                    ratingControl.value=ratings.rate;
+                    ratingControl.addEventListener('blur', (e) => {
+                        const rating = e.target.value;
+                        // Make sure 5 or under
+                        if (rating > 5) {
+                            alert('Please rate 1 - 5');
+                            return;
+                        }
+        
+                    // Change rating
+                    ratings.rate= rating;
+                    getRatings();});
+        
+                    function getRatings(){
+                        //for(let rating in ratings){
+                             // Get percentage
+                            const starPercentage = (ratings.rate / totalstars) * 100;
+        
+                            // Round to nearest 10
+                            const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+                            console.log(starPercentageRounded);
+                            document.querySelector(`.star-inner`).style.width = starPercentageRounded;
+        
+                        }
+                    
+                        
+                    
+                </script><br>
+                <input type="submit" value="Submit">
+            </h3>
+        </form>
+        </p>
+    </div>
+</body>
